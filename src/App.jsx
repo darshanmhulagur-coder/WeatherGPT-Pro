@@ -5,6 +5,8 @@ import ModernHeroStage from './components/ModernHeroStage';
 import HourlyScrubber from './components/HourlyScrubber';
 import MetricGrid from './components/MetricGrid';
 import SevenDayDisasterPanel from './components/SevenDayDisasterPanel';
+import ForecastCharts from './components/ForecastCharts';
+import SectorInsights from './components/SectorInsights';
 import AgriUtilityDrawer from './components/AgriUtilityDrawer';
 import InteractiveMap from './components/InteractiveMap';
 import WeatherChatAgent from './components/WeatherChatAgent';
@@ -20,7 +22,9 @@ import {
   ShieldAlert,
   Compass,
   Cpu,
-  Sparkles
+  Sparkles,
+  BarChart3,
+  CalendarDays
 } from 'lucide-react';
 
 export default function App() {
@@ -37,6 +41,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [chatPromptTrigger, setChatPromptTrigger] = useState('');
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
+  const [forecastViewMode, setForecastViewMode] = useState('cards'); // 'cards' or 'charts'
 
   // PWA Offline states
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
@@ -248,6 +253,7 @@ export default function App() {
                   activeConditionOverride={conditionOverride}
                   isFahrenheit={isFahrenheit}
                   hourlyPreviewItem={hourlyPreviewItem}
+                  language={language}
                 />
               </section>
 
@@ -269,12 +275,63 @@ export default function App() {
                 <MetricGrid weatherData={weatherData} />
               </section>
 
-              {/* SECTION 5: 7-DAY FORECAST & EMERGENCY ADVISORY PANEL */}
-              <section aria-label="7-Day Synoptic Forecast & Disaster Advisory">
-                <SevenDayDisasterPanel
+              {/* SECTION 5: 7-DAY FORECAST & INTERACTIVE CHARTS ENGINE */}
+              <section aria-label="7-Day Synoptic Forecast & Disaster Advisory" className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs font-mono uppercase tracking-wider text-cyan-300/80">
+                      Forecast View Engine
+                    </span>
+                  </div>
+                  <div className="flex items-center p-1 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold shadow-inner">
+                    <button
+                      type="button"
+                      onClick={() => setForecastViewMode('cards')}
+                      className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg transition-all ${
+                        forecastViewMode === 'cards'
+                          ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
+                          : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      <CalendarDays className="w-3.5 h-3.5" />
+                      <span>{t.showCards || "7-Day Cards"}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setForecastViewMode('charts')}
+                      className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg transition-all ${
+                        forecastViewMode === 'charts'
+                          ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
+                          : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      <BarChart3 className="w-3.5 h-3.5" />
+                      <span>{t.showCharts || "Interactive Charts"}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {forecastViewMode === 'cards' ? (
+                  <SevenDayDisasterPanel
+                    weatherData={weatherData}
+                    isFahrenheit={isFahrenheit}
+                    onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
+                  />
+                ) : (
+                  <ForecastCharts
+                    weatherData={weatherData}
+                    language={language}
+                    isFahrenheit={isFahrenheit}
+                  />
+                )}
+              </section>
+
+              {/* SECTION 6: SECTOR-SPECIFIC METEOROLOGICAL INTELLIGENCE (AGRICULTURE, LOGISTICS, RENEWABLE, DISASTER) */}
+              <section aria-label="Sector Insights">
+                <SectorInsights
                   weatherData={weatherData}
+                  language={language}
                   isFahrenheit={isFahrenheit}
-                  onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
                 />
               </section>
 

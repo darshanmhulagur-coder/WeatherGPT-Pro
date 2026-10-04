@@ -142,3 +142,34 @@
   border: none !important;
 }
 
+/* Soundwave Equalizer Animation for 1-Min Audio Bulletin */
+@keyframes soundwave {
+  0%, 100% { height: 3px; }
+  50% { height: 14px; }
+}
+.animate-soundwave-1 { animation: soundwave 0.8s ease-in-out infinite 0.1s; }
+.animate-soundwave-2 { animation: soundwave 0.6s ease-in-out infinite 0.25s; }
+.animate-soundwave-3 { animation: soundwave 1.0s ease-in-out infinite 0.4s; }
+.animate-soundwave-4 { animation: soundwave 0.7s ease-in-out infinite 0.15s; }
+
+/* Clean Official Print Stylesheet for Advisory Bulletins */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+  .no-print, header, footer, button, .leaflet-container, canvas {
+    display: none !important;
+  }
+  .glass-panel, .glass-panel-subtle, .glass-panel-glow {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+  }
+  * {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}
+

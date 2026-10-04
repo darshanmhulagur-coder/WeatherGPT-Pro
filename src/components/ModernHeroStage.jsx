@@ -15,15 +15,22 @@ import {
   MapPin,
   Calendar,
   Eye,
-  Droplets
+  Droplets,
+  Volume2,
+  Square,
+  Printer,
+  AlertTriangle
 } from 'lucide-react';
 import { getLocalNow, getUserTimezone, formatLocalTime, formatLocalDate } from '../services/networkTime';
+import { speechService } from '../services/speechService';
+import { TRANSLATIONS } from '../data/translations';
 
 export default function ModernHeroStage({
   weatherData,
   activeConditionOverride = null,
   isFahrenheit,
-  hourlyPreviewItem = null
+  hourlyPreviewItem = null,
+  language = 'en'
 }) {
   // Live ticking clock & dynamic rolling date synchronized with user's local timezone
   const [currentTime, setCurrentTime] = useState('');
@@ -40,6 +47,48 @@ export default function ModernHeroStage({
     const interval = setInterval(updateDateTime, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const t = TRANSLATIONS[language] || TRANSLATIONS.en;
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      speechService.stopSpeaking();
+    };
+  }, []);
+
+  const handleToggleAudio = () => {
+    if (isPlayingAudio) {
+      speechService.stopSpeaking();
+      setIsPlayingAudio(false);
+    } else {
+      speechService.playBroadcastChime();
+      const script = speechService.generateDailyBulletinScript(weatherData, language);
+      setIsPlayingAudio(true);
+      speechService.speak(
+        script,
+        language,
+        () => setIsPlayingAudio(true),
+        () => setIsPlayingAudio(false)
+      );
+    }
+  };
+
+  const handlePrintBulletin = () => {
+    window.print();
+  };
+
+  const isSevereRain = (weatherData?.current?.precipitation > 5) || (weatherData?.hourly?.[0]?.pop > 65);
+  const isSevereHeat = (weatherData?.current?.temp > 38);
+  const isSevereWind = (weatherData?.current?.windSpeed > 35);
+  const isSevere = isSevereRain || isSevereHeat || isSevereWind;
+  const severeMsg = isSevereRain
+    ? "High Precipitation & Flash Inundation Risk — Caution on Low Waterways"
+    : isSevereHeat
+    ? "Heatwave Advisory — High Insolation & Evaporation"
+    : isSevereWind
+    ? "High Gale Wind Velocity — Secure Loose Outdoor Assets"
+    : null;
 
   // 3D Card Tilt Effect using Framer Motion Springs
   const cardRef = useRef(null);
@@ -297,6 +346,56 @@ export default function ModernHeroStage({
                 </span>
               </div>
             </div>
+
+            {/* Quick Action Chips: 1-Min Audio Bulletin & Print Official Advisory */}
+            <div className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              <button
+                type="button"
+                onClick={handleToggleAudio}
+                className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium text-xs transition-all shadow-md ${
+                  isPlayingAudio
+                    ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-rose-500/20 ring-2 ring-rose-400/50'
+                    : 'bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40'
+                }`}
+                title={isPlayingAudio ? t.stopAudioUpdate : t.playAudioUpdate}
+              >
+                {isPlayingAudio ? (
+                  <>
+                    <Square className="w-3.5 h-3.5 fill-current" />
+                    <span>{t.stopAudioUpdate}</span>
+                    <div className="flex items-end space-x-0.5 h-3 ml-1">
+                      <span className="w-1 bg-white rounded-full animate-soundwave-1"></span>
+                      <span className="w-1 bg-white rounded-full animate-soundwave-2"></span>
+                      <span className="w-1 bg-white rounded-full animate-soundwave-3"></span>
+                      <span className="w-1 bg-white rounded-full animate-soundwave-4"></span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>{t.playAudioUpdate}</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={handlePrintBulletin}
+                className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 border border-slate-700 transition-all no-print"
+                title="Print or Save Weather Advisory Bulletin as PDF"
+              >
+                <Printer className="w-3.5 h-3.5 text-slate-400" />
+                <span>{t.printBulletin || "Print / PDF Advisory"}</span>
+              </button>
+            </div>
+
+            {/* Severe Weather Nowcast Warning Banner */}
+            {isSevere && (
+              <div className="mt-2.5 p-2.5 rounded-xl bg-rose-950/40 border border-rose-500/40 text-xs text-rose-200 flex items-center space-x-2 animate-fadeIn">
+                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0 animate-bounce" />
+                <span className="font-semibold">{severeMsg}</span>
+              </div>
+            )}
 
           </div>
 

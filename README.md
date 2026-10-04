@@ -8,7 +8,7 @@
 
 ---
 
-## 🌦️ Key Functional Modules
+## 🌦️ Key Functional Modules & Features
 
 ### 1. Top Navigation & State/District Search Controls
 - **SIH26068 Micro-Badge**: Dedicated problem statement badge with glowing neon accents.
@@ -24,31 +24,44 @@
 - **Emergency Broadcast Marquee**: Real-time ticker for flash floods, cyclone watches, and river basin warnings.
 - **Metric / Imperial Unit Toggle**: Instant switch between Celsius (°C) and Fahrenheit (°F).
 
-### 2. Hero Dashboard & AI "Weather Window" Engine
-- **Live Microclimate Panel**: Real-time temperature, "Feels Like", Conditions, Humidity, Wind speed & direction with compass bearings, Barometric pressure (hPa), UV index gauge, and AQI dial with health advisories for sensitive groups.
-- **AI "Weather Window" Countdown Banner**:
-  - *☀️ 08:00 AM – 02:30 PM: Clear Window (Safe for outdoor work/drying crops)*
-  - *🌧️ 02:30 PM – 06:00 PM: Heavy Rain Expected (85% Probability)*
-  - *⛅ 06:00 PM – 11:30 PM: Tapering & High Humidity (Hydroplaning warning)*
-- **1-Minute Daily Audio Bulletin**: A dedicated player using the Web Speech API (`SpeechSynthesis`) that generates and voices a comprehensive morning weather briefing in the user's active language.
+### 2. Modern Hero Stage & Multilingual Audio Weather Bulletin
+- **Live Microclimate Panel**: Real-time temperature, "Feels Like", Conditions, High/Low spans, and local network time sync.
+- **🎙️ 1-Minute Daily Audio Bulletin**: 
+  - Integrated speech engine powered by Web Speech API (`SpeechSynthesis`) with localized regional pronunciation tags (`kn-IN`, `hi-IN`, `te-IN`, `ta-IN`, `mr-IN`, `en-IN`).
+  - Realistic audio chime on start and real-time animated audio equalizer / soundwave bars during broadcast.
+- **📄 Official Print / PDF Advisory**: 1-click printable district weather report tailored for farmers, local gram panchayats, and logistics operators.
+- **🚨 Severe Weather Nowcast Alerts**: Dynamic warnings triggering when precipitation risk > 65%, extreme heat > 38°C, or high gale winds > 35 km/h occur.
 
-### 3. Hourly (24h) & 7-Day Interactive Forecast Charts
-- Interactive **Chart.js** curves toggling between Temperature, Precipitation Probability (%), and Cloud Cover trends.
-- 7-day outlook card grid with high/low temperatures and daily rainfall odds.
+### 3. Hourly (24h) Interactive Timeline & Scrubbing Curve
+- Interactive hourly timeline scrubber with smooth temperature curve, humidity, and condition simulation on hover.
+- Time-travel scrubbing mode dynamically updates the hero stage's 3D weather glyph and metrics for any hour of the day.
 
-### 4. Sector-Specific Meteorological Intelligence (Tabbed Architecture)
+### 4. 2x2 Microclimate Metric Grid
+- **CPCB-Calibrated National Air Quality Index (NAQI)** with pollutant breakdowns (PM2.5, PM10, NO2, SO2, CO, O3) and health advisories.
+- **Wind Compass**: Live compass bearing, wind velocity in km/h, and Beaufort scale status.
+- **Atmospheric Pressure & Humidity Gauge**: Dew point and barometric trend indicator.
+- **UV Index Meter**: Peak midday exposure advisory and sun protection alerts.
+
+### 5. Dual-Engine Forecast Center: Synoptic Day Cards & Chart.js Curves
+- **Dual View Mode Toggle**: Switch between **7-Day Synoptic Day Cards** (with min/max range sliders) and **Interactive Trend Charts** (Chart.js).
+- **Interactive Metrics**: Toggle between:
+  - Temperature Trend (°C / °F)
+  - Precipitation Probability Curve (%)
+  - Cloud Cover Saturation (%)
+
+### 6. Sector-Specific Meteorological Intelligence (Tabbed Architecture)
 - 🌾 **Agriculture & Farmers**: Root-zone soil moisture (0-30cm), Evapotranspiration (ET₀ mm/day), precision irrigation advisories, and an **AI Pest & Disease Alert Engine** (calculating fungal blast, downy mildew, and brown plant hopper risks with preventative fungicide prescriptions).
 - 🚚 **Logistics & Route Weather Planner**: Origin-to-destination transit analyzer plotting route milestones, ETAs, elevation gradients, and severe weather road hazards (Ghat fog, aquaplaning risk, gale winds).
 - ⚡ **Renewable Energy**: Global Horizontal Irradiance (GHI kWh/m²), 10kW rooftop daily yield, wind power generation potential, turbine capacity factor, and optimal solar panel tilt angles.
 - 🚨 **Disaster Management & Safe Shelters**: District flood vulnerability index score, CWC river basin telemetry, nearby designated emergency shelters with capacities and medical aid badges, plus one-tap emergency helpline dialers (NDRF 1078, District EOC 1077, 108 Ambulance, 101 Fire).
 
-### 5. Interactive Radar & Climate Anomaly Map
+### 7. Interactive Radar & Climate Anomaly Map
 - Leaflet-powered dark map centered on India with real-time district marker pins.
 - **Dynamic Layer Toggles**: Precipitation Radar, Temperature Heatmap, and Air Quality (AQI) zones.
 - **Time Slider Playback**: -2 hours historical to +2 hours nowcast precipitation movement with automatic play/pause loop.
 - **Crowdsourced "Weather Spotter"**: 1-tap local ground-truthing widget boosting model confidence score.
 
-### 6. Multilingual WeatherGPT AI Agent (Text + Voice Chat)
+### 8. Multilingual WeatherGPT AI Agent (Text + Voice Chat)
 - Native Web Speech API integration (`SpeechRecognition` / `webkitSpeechRecognition`) supporting regional language tags:
   - `kn-IN`, `hi-IN`, `te-IN`, `ta-IN`, `mr-IN`, `en-US`.
 - Speech output toggle (`window.speechSynthesis`) to speak answers back automatically.
@@ -60,7 +73,7 @@
   - Step 4: Physics-Guided Microclimate Neural Inference
   - Displays citations, source references, and confidence percentage.
 
-### 7. Progressive Web App (PWA) & Offline Resilience
+### 9. Progressive Web App (PWA) & Offline Resilience
 - Service worker with stale-while-revalidate caching (`sw.js`).
 - Web App Manifest (`manifest.json`) for desktop and mobile installation.
 - LocalStorage caching ensuring last retrieved district weather metrics remain accessible during storm connectivity drops.
@@ -82,7 +95,7 @@
 
 ```bash
 # 1. Install dependencies
-npm run dev
+npm install
 
 # 2. Start Vite development server
 npm run dev

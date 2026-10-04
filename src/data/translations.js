@@ -89,7 +89,12 @@ export const TRANSLATIONS = {
     sources: "Official Meteorological Sources",
     elevation: "Elevation",
     crops: "Predominant Crops",
-    basin: "River Basin"
+    basin: "River Basin",
+    printBulletin: "Print / PDF Advisory",
+    showCharts: "Interactive Trend Charts",
+    showCards: "Synoptic Day Cards",
+    severeAlertTitle: "Severe Weather Nowcast Advisory",
+    alertSirenPlay: "Play Advisory Tone"
   },
   kn: {
     appTitle: "ವೆದರ್‌ಜಿಪಿಟಿ (WeatherGPT)",
@@ -170,7 +175,12 @@ export const TRANSLATIONS = {
     sources: "ಅಧಿಕೃತ ಹವಾಮಾನ ಮೂಲಗಳು",
     elevation: "ಎತ್ತರ",
     crops: "ಪ್ರಮುಖ ಬೆಳೆಗಳು",
-    basin: "ನದಿ ಪಾತ್ರ"
+    basin: "ನದಿ ಪಾತ್ರ",
+    printBulletin: "ವರದಿ ಮುದ್ರಿಸಿ / PDF",
+    showCharts: "ಸಂವಾದಾತ್ಮಕ ಗ್ರಾಫ್‌ಗಳು",
+    showCards: "೭-ದಿನಗಳ ಕಾರ್ಡ್‌ಗಳು",
+    severeAlertTitle: "ತೀವ್ರ ಹವಾಮಾನ ಎಚ್ಚರಿಕೆ",
+    alertSirenPlay: "ಎಚ್ಚರಿಕೆ ಧ್ವನಿ ಪ್ಲೇ ಮಾಡಿ"
   },
   hi: {
     appTitle: "वेदरजीपीटी (WeatherGPT)",
@@ -251,7 +261,12 @@ export const TRANSLATIONS = {
     sources: "आधिकारिक मौसम विज्ञान स्रोत",
     elevation: "ऊंचाई",
     crops: "प्रमुख फसलें",
-    basin: "नदी बेसिन"
+    basin: "नदी बेसिन",
+    printBulletin: "रिपोर्ट प्रिंट / PDF",
+    showCharts: "संवादात्मक ग्राफ",
+    showCards: "७-दिवसीय कार्ड",
+    severeAlertTitle: "गंभीर मौसम चेतावनी",
+    alertSirenPlay: "चेतावनी ध्वनि बजाएं"
   },
   te: {
     appTitle: "వెదర్‌జీపీటీ (WeatherGPT)",
@@ -332,7 +347,12 @@ export const TRANSLATIONS = {
     sources: "అధికారిక వాతావరణ మూలాలు",
     elevation: "ఎత్తు",
     crops: "ప్రధాన పంటలు",
-    basin: "నదీ పరివాహక ప్రాంతం"
+    basin: "నదీ పరివాహక ప్రాంతం",
+    printBulletin: "నివేదిక ప్రింట్ / PDF",
+    showCharts: "ఇంటరాక్టివ్ గ్రాఫ్‌లు",
+    showCards: "౭-రోజుల కార్డులు",
+    severeAlertTitle: "తీవ్ర వాతావరణ హెచ్చరిక",
+    alertSirenPlay: "హెచ్చరిక ధ్వని ప్లే చేయండి"
   },
   ta: {
     appTitle: "வெதர்கிபிடி (WeatherGPT)",
@@ -413,7 +433,12 @@ export const TRANSLATIONS = {
     sources: "அதிகாரப்பூர்வ வானிலை ஆதாரங்கள்",
     elevation: "உயரம்",
     crops: "முக்கிய பயிர்கள்",
-    basin: "ஆற்றுப் படுகை"
+    basin: "ஆற்றுப் படுகை",
+    printBulletin: "அறிக்கை அச்சிடுக / PDF",
+    showCharts: "ஊடாடும் வரைபடங்கள்",
+    showCards: "௭-நாள் அட்டைகள்",
+    severeAlertTitle: "கடுமையான வானிலை எச்சரிக்கை",
+    alertSirenPlay: "எச்சரிக்கை ஒலி இயக்கவும்"
   },
   mr: {
     appTitle: "वेदरजीपीटी (WeatherGPT)",
@@ -494,6 +519,11 @@ export const TRANSLATIONS = {
     sources: "अधिकृत हवामान स्रोत",
     elevation: "उंची",
     crops: "प्रमुख पिके",
-    basin: "नदी खोरे"
+    basin: "नदी खोरे",
+    printBulletin: "अहवाल प्रिंट / PDF",
+    showCharts: "परस्परसंवादी आलेख",
+    showCards: "७-दिवसीय कार्डे",
+    severeAlertTitle: "गंभीर हवामान चेतावणी",
+    alertSirenPlay: "इशारा ध्वनी प्ले करा"
   }
 };
